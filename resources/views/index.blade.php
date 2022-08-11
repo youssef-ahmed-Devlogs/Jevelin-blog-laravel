@@ -40,7 +40,7 @@
                                     </div>
                                     <h2 class="card-title mb-2">
                                         <a href="{{ route('articles.show', $article->id) }}">
-                                            {{ substr($article->title, 0, 15) . '...' }}
+                                            {{ substr($article->title, 0, 30) . '...' }}
                                         </a>
                                     </h2>
                                     <p class="card-text">

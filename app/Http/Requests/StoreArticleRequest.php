@@ -30,7 +30,7 @@ class StoreArticleRequest extends FormRequest
         ];
 
         foreach (config('translatable.locales') as $locale) {
-            $rules[$locale . '.title'] = ['required', 'min:50', 'max:255'];
+            $rules[$locale . '.title'] = ['required', 'min:30', 'max:255'];
             $rules[$locale . '.content'] = ['required', 'min:100', 'max:2000'];
         }
 

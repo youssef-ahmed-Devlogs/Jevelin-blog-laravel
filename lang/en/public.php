@@ -18,6 +18,10 @@ return [
   'home' => 'Home',
   'profile' => 'Profile',
   'addArticle' => 'Add article',
+  'articles' => 'Articles',
+  'dashboard' => 'Dashboard',
+  'comments' => 'Comments',
+  'articles' => 'Articles',
   'Logout' => 'Logout',
 
   // Home

@@ -108,6 +108,27 @@
                                         {{ __('public.addArticle') }}
                                     </a>
 
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-newspaper icon"></i>
+                                        {{ __('public.articles') }}
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-user-cog icon"></i>
+                                        {{ __('public.dashboard') }}
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-comments icon"></i>
+                                        {{ __('public.comments') }}
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-list-ul icon"></i>
+                                        {{ __('public.categories') }}
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-users icon"></i>
+                                        {{ __('public.users') }}
+                                    </a>
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -115,7 +136,8 @@
                                         {{ __('public.Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        class="d-none">
                                         @csrf
                                     </form>
                                 </div>

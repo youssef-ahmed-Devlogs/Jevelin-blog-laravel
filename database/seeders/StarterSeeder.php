@@ -49,21 +49,21 @@ class StarterSeeder extends Seeder
             ],
         ]);
 
-        $categories = [$category1->id, $category2->id];
+        // $categories = [$category1->id, $category2->id];
 
-        $article = Article::create([
-            'user_id' => $user->id,
-            'image' => 'images/empty.png',
-            'en' => [
-                'title' => 'Article in english',
-                'content' => 'Article in english Article in english Article',
-            ],
-            'ar' => [
-                'title' => 'مقالة عربية',
-                'content' => 'مقالة عربية مقالة عربية مقالة عربية مقالة عربية مقالة عربية',
-            ],
-        ]);
+        // $article = Article::create([
+        //     'user_id' => $user->id,
+        //     'image' => 'images/empty.png',
+        //     'en' => [
+        //         'title' => 'Article in english',
+        //         'content' => 'Article in english Article in english Article',
+        //     ],
+        //     'ar' => [
+        //         'title' => 'مقالة عربية',
+        //         'content' => 'مقالة عربية مقالة عربية مقالة عربية مقالة عربية مقالة عربية',
+        //     ],
+        // ]);
 
-        $article->categories()->attach($categories);
+        // $article->categories()->attach($categories);
     }
 }
