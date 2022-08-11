@@ -33,7 +33,7 @@ return [
   'arabic' => 'Arabic',
   'title' => 'Title',
   'content' => 'Content',
-  'Categories' => 'categories',
+  'categories' => 'Categories',
   'image' => 'Image',
   'create' => 'Create',
 

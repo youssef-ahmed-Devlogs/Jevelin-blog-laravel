@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreArticleRequest;
 use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ class ArticleController extends Controller
         return view('articles.create', compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store(StoreArticleRequest $request)
     {
         $imagePath = $request->file('image')->store('images', 'public');
         $articleData = $request->all();

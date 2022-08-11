@@ -12,27 +12,55 @@
                 </h2>
                 <div class="form-group mb-2">
                     <label for="title">{{ __('public.title') }}</label>
-                    <input type="text" name="{{ $locale }}[title]" id="title" class="form-control">
+                    <input type="text" name="{{ $locale }}[title]" id="title"
+                        class="form-control  @error($locale . '.title') is-invalid @enderror"
+                        value="{{ old($locale . '.title') }}">
+
+                    @error($locale . '.title')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
 
                 <div class="form-group mb-2">
                     <label for="content">{{ __('public.content') }}</label>
-                    <textarea name="{{ $locale }}[content]" id="content" class="form-control"></textarea>
+                    <textarea name="{{ $locale }}[content]" id="content"
+                        class="form-control @error($locale . '.content') is-invalid @enderror">{{ old($locale . '.content') }}</textarea>
+
+                    @error($locale . '.content')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
             @endforeach
 
             <div class="form-group mb-2">
                 <label for="categories">{{ __('public.categories') }}</label>
-                <select name="categories[]" id="categories" class="form-control" multiple>
-                    @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->title }}</option>
+                <select name="categories[]" id="categories" class="form-control @error('categories') is-invalid @enderror"
+                    multiple>
+                    @endphp
+                    @foreach ($categories as $index => $category)
+                        <option value="{{ $category->id }}">
+                            {{ $category->title }}</option>
                     @endforeach
                 </select>
+                @error('categories')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
 
             <div class="form-group">
                 <label for="image">{{ __('public.image') }}</label>
-                <input type="file" class="form-control" name="image">
+                <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
+                @error('image')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
 
             <button class="btn btn-primary mt-2">{{ __('public.create') }}</button>
