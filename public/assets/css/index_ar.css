@@ -1,0 +1,28 @@
+.navbar-nav.ms-auto {
+    margin-left: initial !important;
+    margin-right: auto;
+}
+
+.form-check .form-check-input {
+    float: initial !important;
+    margin-left: initial !important;
+}
+
+.section-subtitle {
+    padding-left: initial !important;
+    padding-right: 15px;
+}
+
+.section-subtitle::after {
+    left: initial !important;
+    right: 0;
+}
+
+.dropdown-menu {
+    right: initial !important;
+    left: 0 !important;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    float: initial !important;
+}
