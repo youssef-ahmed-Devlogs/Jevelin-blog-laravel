@@ -45,7 +45,9 @@
                                     style="height: 200px;object-fit: cover;" alt="">
                                 <div class="card-body">
                                     <h5 class="card-title mb-2">
-                                        {{ substr($relatedArticle->title, 0, 15) . '...' }}
+                                        <a href="{{ route('articles.show', $relatedArticle->id) }}">
+                                            {{ substr($relatedArticle->title, 0, 15) . '...' }}
+                                        </a>
                                     </h5>
                                     <div class="card-categories">
                                         @foreach ($relatedArticle->categories as $index => $relatedArticleCategory)

@@ -33,9 +33,9 @@ Route::get('/categories/create', [CategoryController::class, 'create'])->name('c
 Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store');
 
 // Articles
-Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
-Route::post('/articles/store', [ArticleController::class, 'store'])->name('articles.store');
-Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('articles.show');
+Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create')->middleware('auth');
+Route::post('/articles/store', [ArticleController::class, 'store'])->name('articles.store')->middleware('auth');
+Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('articles.show')->middleware('auth');
 
 // Articles Comments
-Route::post('/comments/store/{articleId}', [CommentController::class, 'store'])->name('comments.store');
+Route::post('/comments/store/{articleId}', [CommentController::class, 'store'])->name('comments.store')->middleware('auth');

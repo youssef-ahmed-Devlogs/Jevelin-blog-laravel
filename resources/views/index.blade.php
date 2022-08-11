@@ -26,7 +26,7 @@
         {{-- HOME Content --}}
         <div class="row">
             <div class="col-lg-8">
-                <div class="row">
+                <div class="row home-articles">
 
                     @foreach ($articles as $article)
                         <div class="col-lg-6 mb-4">
@@ -68,6 +68,7 @@
                 </div>
                 {{ $articles->links() }}
             </div>
+
             <div class="col-lg-4">
                 <h4 class="section-subtitle mb-3">{{ __('public.latest_articles') }}</h4>
 

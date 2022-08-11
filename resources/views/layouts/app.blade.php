@@ -28,7 +28,8 @@
     @endif
 </head>
 
-<body class="@if (Request::is('/')) home @endif @if (Route::currentRouteName() == 'articles.show') has-breadcrumb @endif">
+<body
+    class="@if (Request::is('/')) navbar-transparen @endif @if (Route::currentRouteName() == 'articles.show') has-breadcrumb @endif">
 
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -56,30 +57,41 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" id="search-btn">
+                                <i class="fa fa-search fa-fw"></i>
+                            </a>
+                            <form action="{{ route('index') }}" method="GET" id="search-form" class="d-none">
+                                <input type="text" name="s" class="form-control" placeholder="Search..."
+                                    value="{{ isset($searchQuery) ? $searchQuery : '' }}">
+                                @if (isset($categoryQuery) && $categoryQuery != 'all')
+                                    <input type="hidden" name="category" value="{{ $categoryQuery }}"
+                                        class="form-control" placeholder="Search...">
+                                @endif
+
+                                <span id="close-search-form-btn">x</span>
+                            </form>
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('public.login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">
+                                        <i class="fas fa-door-open icon"></i>
+                                        {{ __('public.login') }}
+                                    </a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('public.register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">
+                                        <i class="fas fa-user-plus icon"></i>
+                                        {{ __('public.register') }}
+                                    </a>
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item">
-                                <form action="" method="GET">
-                                    <input type="text" name="s" class="form-control" placeholder="Search..."
-                                        value="{{ isset($searchQuery) ? $searchQuery : '' }}">
-                                    @if (isset($categoryQuery) && $categoryQuery != 'all')
-                                        <input type="hidden" name="category" value="{{ $categoryQuery }}"
-                                            class="form-control" placeholder="Search...">
-                                    @endif
-                                </form>
-                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -88,15 +100,18 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="#">
+                                        <i class="fas fa-user icon"></i>
                                         {{ __('public.profile') }}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('articles.create') }}">
+                                        <i class="fas fa-plus-square icon"></i>
                                         {{ __('public.addArticle') }}
                                     </a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
+                                        <i class="fas fa-door-closed icon"></i>
                                         {{ __('public.Logout') }}
                                     </a>
 
@@ -106,6 +121,9 @@
                                 </div>
                             </li>
                         @endguest
+
+
+
                         <li class="nav-item dropdown language-menu">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -116,7 +134,8 @@
                                 @foreach (config('translatable.locales') as $locale)
                                     @if (App::getLocale() != $locale)
                                         <a class="dropdown-item" href="{{ route('locale.set', $locale) }}">
-                                            <img src="{{ asset('assets/images/' . $locale . '.png') }}" alt="">
+                                            <img src="{{ asset('assets/images/' . $locale . '.png') }}"
+                                                alt="">
                                             {{ strtoupper($locale) }}
                                         </a>
                                     @endif
@@ -141,6 +160,8 @@
         <main>
             @yield('content')
         </main>
+
+        <script src="{{ asset('assets/js/index.js') }}"></script>
     </div>
 </body>
 
