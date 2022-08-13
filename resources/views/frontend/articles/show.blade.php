@@ -5,7 +5,24 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="card mb-5">
-                    <img src="{{ asset("storage/$article->image") }}" alt="">
+
+                    <div class="swiper article-images w-100">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
+                            <!-- Slides -->
+                            @foreach ($article->images as $image)
+                                <div class="swiper-slide">
+                                    <img src="{{ asset("storage/{$image->path}") }}" class="w-100" alt="">
+                                </div>
+                            @endforeach
+                        </div>
+                        <!-- If we need pagination -->
+                        <div class="swiper-pagination"></div>
+
+                        <!-- If we need navigation buttons -->
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
                     <div class="card-body">
                         <div class="card-info mb-2">
                             <span class="author">{{ $article->user->first_name . ' ' . $article->user->last_name }}</span>
@@ -41,12 +58,12 @@
                     @foreach ($relatedArticles as $relatedArticle)
                         <div class="col-lg-4">
                             <div class="card">
-                                <img src="{{ asset("storage/$relatedArticle->image") }}"
+                                <img src="{{ asset("storage/{$relatedArticle->images[0]->path}") }}"
                                     style="height: 200px;object-fit: cover;" alt="">
                                 <div class="card-body">
                                     <h5 class="card-title mb-2">
                                         <a href="{{ route('articles.show', $relatedArticle->id) }}">
-                                            {{ substr($relatedArticle->title, 0, 15) . '...' }}
+                                            {{ mb_substr($relatedArticle->title, 0, 15) . '...' }}
                                         </a>
                                     </h5>
                                     <div class="card-categories">
@@ -94,7 +111,8 @@
 
                 @foreach ($latestArticles as $latestArticle)
                     <div class="latest-articles">
-                        <img src="{{ asset("storage/$latestArticle->image") }}" alt="">
+
+                        <img src="{{ asset("storage/{$latestArticle->images[0]->path}") }}" alt="">
                         <div class="info">
                             <div class="categories">
                                 @foreach ($latestArticle->categories as $index => $latestArticleCategory)
@@ -106,7 +124,7 @@
                             </div>
                             <h5 class="title">
                                 <a href="{{ route('articles.show', $latestArticle->id) }}">
-                                    {{ substr($latestArticle->title, 0, 15) }}
+                                    {{ mb_substr($latestArticle->title, 0, 15) }}
                                 </a>
                             </h5>
                         </div>
@@ -118,4 +136,23 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        const swiper = new Swiper('.article-images', {
+            loop: true,
+
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
 @endsection

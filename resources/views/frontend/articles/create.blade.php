@@ -4,7 +4,7 @@
     <div class="container">
         <h1 class="section-title mb-5">{{ __('public.create_article') }}</h1>
 
-        <form action="{{ route('articles.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('articles.store') }}" method="POST" id="add-article" enctype="multipart/form-data">
             @csrf
 
             @foreach (config('translatable.locales') as $locale)
@@ -38,8 +38,8 @@
 
             <div class="form-group mb-2">
                 <label for="categories">{{ __('public.categories') }}</label>
-                <select name="categories[]" id="categories" class="form-control @error('categories') is-invalid @enderror"
-                    multiple>
+                <select name="categories[]" id="categories" id="select2"
+                    class="form-control  @error('categories') is-invalid @enderror" multiple>
                     @endphp
                     @foreach ($categories as $index => $category)
                         <option value="{{ $category->id }}">
@@ -54,16 +54,32 @@
             </div>
 
             <div class="form-group">
-                <label for="image">{{ __('public.image') }}</label>
-                <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
-                @error('image')
+                <label for="images">{{ __('public.images') }}</label>
+                <input type="file" class="form-control @error('images') is-invalid @enderror" name="images[]" multiple>
+
+                @error('images')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
+
+                @if (\Session::has('imagesErrors'))
+                    <span class="invalid-feedback d-block" role="alert">
+                        @foreach (\Session::get('imagesErrors') as $imageError)
+                            <strong class="d-block">{{ $imageError }}</strong>
+                        @endforeach
+                    </span>
+                @endif
+
+
             </div>
 
-            <button class="btn btn-primary mt-2">{{ __('public.create') }}</button>
+            <button class="btn btn-primary mt-2" id="saveBtn">{{ __('public.create') }}</button>
         </form>
+
     </div>
+@endsection
+
+@section('script')
+    <script></script>
 @endsection

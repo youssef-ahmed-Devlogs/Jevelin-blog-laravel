@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -26,7 +26,7 @@ class StoreArticleRequest extends FormRequest
 
         $rules = [
             'categories' => ['required'],
-            'image' => ['required', 'mimes:png,jpg,jpeg', 'max:1000']
+            'images' => ['required', 'max:500'],
         ];
 
         foreach (config('translatable.locales') as $locale) {

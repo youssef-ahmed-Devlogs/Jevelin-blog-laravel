@@ -127,8 +127,22 @@ body .dropdown-menu .icon {
     border-radius: 5px;
 }
 
+.table-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .btn {
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    width: fit-content;
+}
+
+.btn i {
+    color: #fff;
 }
 
 .btn-link {
@@ -352,6 +366,16 @@ body .dropdown-menu .icon {
 .language-menu img {
     width: 24px;
     height: 24px;
+}
+
+.swiper-button-next,
+.swiper-button-prev,
+.swiper-pagination-bullet {
+    color: #47c9e5;
+}
+
+.swiper-pagination-bullet-active {
+    background: #47c9e5;
 }
 
 /* ==================== HOME ==================== */

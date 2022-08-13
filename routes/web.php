@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\ArticleController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ArticleAlbumController;
+use App\Http\Controllers\Frontend\ArticleController;
+use App\Http\Controllers\Frontend\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocalizationController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,26 +22,14 @@ use Illuminate\Support\Facades\Route;
 
 // Home page
 Route::get('/', [HomeController::class, 'index'])->name('index');
-
 Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Localization
 Route::get('locale/{locale}', [LocalizationController::class, 'setLocale'])->name('locale.set');
 
-// Categories
-Route::controller(CategoryController::class)->group(function () {
-  Route::group(['prefix' => 'categories', 'as' => 'categories.', 'middleware' => 'auth'], function () {
-    Route::get('/', 'index')->name('index');
-    Route::get('create', 'create')->name('create');
-    Route::post('store', 'store')->name('store');
-  });
-});
-
 // Articles
 Route::controller(ArticleController::class)->group(function () {
-  Route::group(['prefix' => 'articles', 'as' => 'articles.', 'middleware' => 'auth'], function () {
+  Route::group(['prefix' => 'articles', 'as' => 'articles.', 'middleware' => ['auth', 'role:user|admin']], function () {
     Route::get('/create', 'create')->name('create');
     Route::post('/', 'store')->name('store');
     Route::get('/{id}', 'show')->name('show');
@@ -48,3 +38,7 @@ Route::controller(ArticleController::class)->group(function () {
 
 // Articles Comments
 Route::post('/comments/store/{articleId}', [CommentController::class, 'store'])->name('comments.store')->middleware('auth');
+
+
+Route::post('upload', [ArticleAlbumController::class, 'upload']);
+Route::delete('upload', [ArticleAlbumController::class, 'cancel']);

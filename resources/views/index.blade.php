@@ -28,10 +28,10 @@
             <div class="col-lg-8">
                 <div class="row home-articles">
 
-                    @foreach ($articles as $article)
+                    @forelse($articles as $article)
                         <div class="col-lg-6 mb-4">
                             <div class="card">
-                                <img src="{{ asset("storage/$article->image") }}" alt="">
+                                <img src="{{ asset("storage/{$article->images[0]->path}") }}" alt="">
                                 <div class="card-body">
                                     <div class="card-info mb-2">
                                         <span
@@ -40,11 +40,11 @@
                                     </div>
                                     <h2 class="card-title mb-2">
                                         <a href="{{ route('articles.show', $article->id) }}">
-                                            {{ substr($article->title, 0, 30) . '...' }}
+                                            {{ mb_substr($article->title, 0, 30) . '...' }}
                                         </a>
                                     </h2>
                                     <p class="card-text">
-                                        {{ substr($article->content, 0, 100) . '...' }}
+                                        {{ mb_substr($article->content, 0, 100) . '...' }}
                                     </p>
                                     <div class="card-comments">
                                         <i class="fas fa-comment icon"></i>
@@ -63,8 +63,12 @@
                                 </div>
                             </div>
                         </div>
-                    @endforeach
-
+                    @empty
+                        <h2 class="display-3 fw-bold">
+                            No Articles For Now.
+                        </h2>
+                        <a href="{{ route('articles.create') }}" class="btn btn-link">Add new article</a>
+                    @endforelse
                 </div>
                 {{ $articles->links() }}
             </div>
@@ -74,7 +78,7 @@
 
                 @foreach ($latestArticles as $latestArticle)
                     <div class="latest-articles">
-                        <img src="{{ asset("storage/$latestArticle->image") }}" alt="">
+                        <img src="{{ asset("storage/{$latestArticle->images[0]->path}") }}" alt="">
                         <div class="info">
                             <div class="categories">
                                 @foreach ($latestArticle->categories as $index => $latestArticleCategory)
@@ -86,7 +90,7 @@
                             </div>
                             <h5 class="title">
                                 <a href="{{ route('articles.show', $latestArticle->id) }}">
-                                    {{ substr($latestArticle->title, 0, 15) }}
+                                    {{ mb_substr($latestArticle->title, 0, 15) }}
                                 </a>
                             </h5>
                         </div>

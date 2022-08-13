@@ -21,7 +21,7 @@ return [
   'articles' => 'Articles',
   'dashboard' => 'Dashboard',
   'comments' => 'Comments',
-  'articles' => 'Articles',
+  'users' => 'Users',
   'Logout' => 'Logout',
 
   // Home
@@ -45,4 +45,15 @@ return [
   'related_articles' => 'Related Articles',
   'leave_a_comment' => 'Leave a comment',
   'comment' => 'Comment',
+
+  // Categories
+  'description' => 'Description',
+  'actions' => 'Actions',
+  'edit' => 'Edit',
+  'delete' => 'Delete',
+  'add_category' => 'Add Category',
+  'edit_category' => 'Edit Category',
+
+  'empty' => 'Empty',
+  'are_you_sure' => 'Are You Sure?',
 ];

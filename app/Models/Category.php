@@ -13,4 +13,9 @@ class Category extends Model implements TranslatableContract
 
     public $translatedAttributes = ['title', 'description'];
     protected $fillable = ['id'];
+
+    public function articles()
+    {
+        return $this->belongsToMany(Article::class);
+    }
 }

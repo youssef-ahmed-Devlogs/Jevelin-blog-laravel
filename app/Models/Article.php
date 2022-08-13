@@ -12,7 +12,7 @@ class Article extends Model implements TranslatableContract
     use HasFactory, Translatable;
 
     public $translatedAttributes = ['title', 'content'];
-    protected $fillable = ['user_id', 'image'];
+    protected $fillable = ['user_id'];
 
     public function user()
     {
@@ -27,5 +27,10 @@ class Article extends Model implements TranslatableContract
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(ArticleAlbum::class);
     }
 }

@@ -18,11 +18,15 @@
         rel="stylesheet">
 
     <!-- Scripts -->
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
     <!-- Css -->
     <link rel="stylesheet" href="{{ asset('assets/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/swiper-bundle.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/index.css') }}">
+
     @if (app()->getLocale() == 'ar')
         <link rel="stylesheet" href="{{ asset('assets/css/index_ar.css') }}">
     @endif
@@ -108,26 +112,28 @@
                                         {{ __('public.addArticle') }}
                                     </a>
 
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-newspaper icon"></i>
-                                        {{ __('public.articles') }}
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-user-cog icon"></i>
-                                        {{ __('public.dashboard') }}
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-comments icon"></i>
-                                        {{ __('public.comments') }}
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-list-ul icon"></i>
-                                        {{ __('public.categories') }}
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-users icon"></i>
-                                        {{ __('public.users') }}
-                                    </a>
+                                    @if (Auth::user()->hasRole('admin'))
+                                        <a class="dropdown-item" href="#">
+                                            <i class="fas fa-newspaper icon"></i>
+                                            {{ __('public.articles') }}
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="fas fa-user-cog icon"></i>
+                                            {{ __('public.dashboard') }}
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="fas fa-comments icon"></i>
+                                            {{ __('public.comments') }}
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('dashboard.categories.index') }}">
+                                            <i class="fas fa-list-ul icon"></i>
+                                            {{ __('public.categories') }}
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="fas fa-users icon"></i>
+                                            {{ __('public.users') }}
+                                        </a>
+                                    @endif
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
@@ -174,7 +180,7 @@
             <ul class="breadcrumb mb-5">
                 <li class="breadcrumb-item"><a href="{{ route('index') }}">{{ __('public.home') }}</a></li>
                 <li class="breadcrumb-item active" aria-current="page">
-                    {{ substr($article->title, 0, 100) }}
+                    {{ mb_substr($article->title, 0, 100) }}
                 </li>
             </ul>
         @endif
@@ -183,7 +189,18 @@
             @yield('content')
         </main>
 
+        <script src="{{ asset('assets/js/select2.min.js') }}"></script>
+        <script src="{{ asset('assets/js/swiper-bundle.min.js') }}"></script>
         <script src="{{ asset('assets/js/index.js') }}"></script>
+
+        <script>
+            $(document).ready(function() {
+                $("select").select2();
+            });
+        </script>
+
+        @yield('script')
+
     </div>
 </body>
 
